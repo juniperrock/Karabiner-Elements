@@ -925,6 +925,12 @@ private:
   }
 
   bool needs_grab_pointing_device(void) const {
+    // Pointing device grabbing is disabled completely because of issues with fast mouse movements.
+    // Explanation: Some mice appear in Karabiner-Elements as only one device which is both a keyboard and a pointing device.
+    // We would still want to grab the keyboard part, so disabling the pointing device in the settings is not an option.
+    // e.g. Logitech G604 is affected by this issue in Bluetooth mode (in Lightspeed USB mode it appears as two separate devices).
+    return false;
+
     //
     // Check if there is a pointing device to grab
     //
